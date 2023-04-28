@@ -118,3 +118,60 @@ We're advised to use **>=4096Mb** of RAM and **3** CPU cores
 
 ## Configuring Disk Storage
 
+This disk partition will work as the main Drive for the machine and we're advised to use **>=200.0 GB** 
+
+![image](https://user-images.githubusercontent.com/91763346/235264922-3b58e7c1-8b27-4bb3-88d7-a43a8da54359.png)
+
+Now we just need to specify the Storage Volume Location
+
+![image](https://user-images.githubusercontent.com/91763346/235264936-80652a5e-aa39-4289-a563-416c6e927b34.png)
+
+Now the next step would be to resume the installation of the FusionCompute CNA01 and for that we can just select the **custom** **storage** 
+
+![image](https://user-images.githubusercontent.com/91763346/235265107-e969f3fa-b100-4984-8ff1-1801d796993a.png)
+
+In the next step we need to change the machine name to **CNA01** and tick the **Customize Configuration before install**
+
+![image](https://user-images.githubusercontent.com/91763346/235265379-1000e300-677f-46d2-bd80-0f0d4d804957.png)
+
+## Changing the CPU Model
+As seen on Huawei's guide, we need to set the CPU model to **host-passthrough** or else FusionCompute won't work properly
+
+![image](https://user-images.githubusercontent.com/91763346/235265536-eba1e7f3-8f0e-4cd2-b5fe-d49d7e1ef7ca.png)
+
+## Changine the Memory Settings
+
+We need to check that the memory is **>=7168MB** for CNA to work properly
+
+![image](https://user-images.githubusercontent.com/91763346/235265956-e0911b7f-a2f5-4d10-bf67-4608677547a5.png)
+
+## Changing Disk Settings
+
+In a nutshell, VirtIO's main purpose is to send and receive network data to and from the host. In other words, let virtio-net be a liaison for network data between the host and the guest. 
+
+![image](https://user-images.githubusercontent.com/91763346/235266010-b304260e-e03c-464e-afd2-66ac8505d849.png)
+
+So I did set the Disk Bus to **VirtIO** for better performance
+
+## Changing the NIC Bridge Settings
+
+![image](https://user-images.githubusercontent.com/91763346/235266452-539c3195-ce35-4c60-b245-75c9727d273a.png)
+
+To have better performance and no errors, we're advised to use :
+* Network Source: Bridge brx (the bridge NIC that we configured earlier) 
+* Device mode: e1000
+
+## Starting the CNA01 Installation
+
+![image](https://user-images.githubusercontent.com/91763346/235266598-4d20e706-fbd8-4bd3-9360-9fdf3d27d9d0.png)
+
+After verifying all the settings and requirements we're ready to start the installation.
+
+## Customizing the Configuration during installation
+
+The first thing that needs to be configured is:
+* Network:
+
+![image](https://user-images.githubusercontent.com/91763346/235266842-97bb0f05-156d-42c3-826f-a831d3573370.png)
+
+We need to set the IP to a non-leased IP
