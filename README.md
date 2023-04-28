@@ -1,5 +1,13 @@
 # Setting up FusionCompute as a Learning & Testing Platform
+
 This repository describes how to install FusionCompute on a common PC for testing or learning purposes.
+
+* Machine Number: 7
+* Machine Hostname: Isetcom07
+* Host Machine IP: 172.16.16.207/24
+* CNA01 IP: 172.16.16.11/24
+* VRM IP: 172.16.16.12/24
+* Default Gateway: 172.16.16.1
 
 # What is Huawei's FusionCompute Solution?
 
