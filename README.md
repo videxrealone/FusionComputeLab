@@ -182,4 +182,120 @@ The first thing that needs to be configured is:
 
 ![image](https://user-images.githubusercontent.com/91763346/235266842-97bb0f05-156d-42c3-826f-a831d3573370.png)
 
-We need to set the IP to a non-leased IP
+We need to set the IP to a non-leased IP and for that I chose : 172.16.16.11 because the other network machines are use this format : 172.16.16.2xx.
+The default gateway also needs to be set: 172.16.16.1
+
+* Hostname:
+
+![image](https://user-images.githubusercontent.com/91763346/235269774-7256e5e1-1b60-42fc-9728-1bd797ed8667.png)
+
+We're going to use CNA01 as hostname for that machine
+
+* Password
+![image](https://user-images.githubusercontent.com/91763346/235269852-89c35356-3cd1-44d7-8926-4749e16cfbaf.png)
+
+We're going to setup a machine password to protect it and it's resources.
+
+Now after making sure that all the above is valid and is configured, we can start the installation by clicking **F12**.
+
+![image](https://user-images.githubusercontent.com/91763346/235269938-47391c81-7be0-4d4c-bd16-81c87b2700ce.png)
+
+## Logging in and Checking network Connectivity
+
+![image](https://user-images.githubusercontent.com/91763346/235270242-f634dbea-aad3-4444-bdd4-cfa58d962d56.png)
+
+After the installation ends, we should be able to login and check the configuration.
+* USER: root
+* Pass: isetcom07! 
+Remember to Always use a secure password!  
+Because this is a testing lab I used a simple one.
+
+We proceed to ping the default gateway that we configured earlier.
+``` 
+$ ping 172.16.16.1
+64 bytes from 172.16.16.1: icmp_seq=1 ttl=64 time=0.68ms
+64 bytes from 172.16.16.1: icmp_seq=2 ttl=64 time=1.26ms
+64 bytes from 172.16.16.1: icmp_seq=3 ttl=64 time=1.16ms
+^C
+```
+
+# Installing the VRM
+
+* VRM IP: 172.16.16.12
+* VRM Gateway: 172.16.16.1
+
+![image](https://user-images.githubusercontent.com/91763346/235271555-3c3f5116-3748-44d4-89be-09819f9f3a16.png)
+
+We just need to repeat all the previous steps but using the FusionCompute VRM file.
+
+# (Optional) Installation and Configuration on PC2
+
+This step is optional but the steps are:
+* Installing Ubuntu.
+* Installing and Configuring KVM.
+* Installing CNA02 (same way as before).
+* Connecting PC1 and PC2 on the same network.
+
+# Testing FusionCompute
+
+Now after verifying connectivity, we can proceed to install the NFS server on our host PC1.
+NFS (Network File System) allows a system to share directories and files with others over a network. By using NFS, users and programs can access files on remote systems almost as if they were local files.
+
+## Installing NFS Server on Host PC1
+
+![image](https://user-images.githubusercontent.com/91763346/235270980-18d5aedc-4ec6-4206-9853-dea29d1416b5.png)
+
+We just need to run: 
+
+```
+$ sudo apt install nfs-kernel-server
+$ sudo apt install vim
+```
+
+Now we need to make a shared directory:
+
+```
+~$ mkdir nfs_vm
+~$ cd nfs_vm
+~/nfs_vm$ pwd
+```
+
+Now we need to edit the /etc/exports to configure the NFS configuration and we just need to append the following line:
+```
+/home/isetcom07/nfs_vm *(rw,sync,no_subtree_check,no_root_squash)
+```
+
+## Restarting nfs-kernel-server daemon
+
+For the configuration change to take effect, we need to restart the nfs-kernel-server
+
+```
+$ sudo systemctl restart nfs-kernerl-server
+$ sudo systemctl enable nfs-kernerl-server
+```
+
+# Accessing the Management Interface
+
+![31](https://user-images.githubusercontent.com/91763346/235271694-e00ac788-651c-4849-9360-ea471b0d52c4.PNG)
+
+In our case the IP of the VRM is: 172.16.16.12
+
+If everything runs perfectly, we should be able to access the VRM via **https://172.16.16.12*** .
+
+We can use the following creds:
+* Login: admin
+* password: IaaS@PORTAL-CLOUD8!
+
+# How to use the NFS Server on FusionCompute
+
+![image](https://user-images.githubusercontent.com/91763346/235271948-253b7153-67cc-4f50-ade1-27e3644ad0c6.png)
+
+
+We just need to use the same step in which we did configure Storage and Bridge Networks.
+
+
+
+
+
+
+
