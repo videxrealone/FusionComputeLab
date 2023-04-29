@@ -142,12 +142,13 @@ In the next step we need to change the machine name to **CNA01** and tick the **
 
 ![image](https://user-images.githubusercontent.com/91763346/235265379-1000e300-677f-46d2-bd80-0f0d4d804957.png)
 
-## Changing the CPU Model
+## 
+ng the CPU Model
 As seen on Huawei's guide, we need to set the CPU model to **host-passthrough** or else FusionCompute won't work properly
 
 ![image](https://user-images.githubusercontent.com/91763346/235265536-eba1e7f3-8f0e-4cd2-b5fe-d49d7e1ef7ca.png)
 
-## Changine the Memory Settings
+## Changing the Memory Settings
 
 We need to check that the memory is **>=7168MB** for CNA to work properly
 
